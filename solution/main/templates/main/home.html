@@ -27,23 +27,17 @@
                                 </path>
                             </clipPath>
                             <!-- xlink:href for modern browsers, src for IE8- -->
-                            <image clip-path="url(#clip-path)" xlink:href="{% static 'images/learn-img.jpg' %}"
+                            <image clip-path="url(#clip-path)" xlink:href="{% static home_image_path %}"
                                 width="100%" height="465" class="svg__image"></image>
                         </svg>
                     </div>
                 </div>
             </div>
             <div class="col-md-5">
-                <h2> We are a Creative Digital
-                    Agency & Marketing Experts </h2>
-                <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. In rhoncus turpis nisl, vitae dictum mi
-                    semper convallis. Ut sapien leo, varius ac dapibus a, cursus quis ante. </p>
+                <h2> {{ home_title }} </h2>
+                <p> {{home_theme}} </p>
                 <p>
-                    <small>Nunc sodales lobortis arcu, sit amet venenatis erat placerat a. Donec lacinia magna
-                        nulla,
-                        cursus impediet augue egestas id. Suspendisse dolor lectus, pellentesque quis tincidunt ac,
-                        dictum id neque.
-                    </small>
+                    <small> {{ home_description }} </small>
                 </p>
                 <a href="#">Learn More <i class="fa fa-angle-right" aria-hidden="true"></i></a>
             </div>
