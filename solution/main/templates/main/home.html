@@ -5,6 +5,7 @@
 <div class="container-fluid gtco-feature" id="services">
     <div class="container">
         <div class="row">
+            {% for item in home_data %}
             <div class="col-md-7">
                 <div class="cover">
                     <div class="card">
@@ -27,20 +28,22 @@
                                 </path>
                             </clipPath>
                             <!-- xlink:href for modern browsers, src for IE8- -->
-                            <image clip-path="url(#clip-path)" xlink:href="{% static home_image_path %}"
+                            <image clip-path="url(#clip-path)" xlink:href="{% static item.home_image_path %}"
                                 width="100%" height="465" class="svg__image"></image>
                         </svg>
                     </div>
                 </div>
             </div>
+            
             <div class="col-md-5">
-                <h2> {{ home_title }} </h2>
-                <p> {{home_theme}} </p>
+                <h2> {{ item.home_title }} </h2>
+                <p> {{ item.home_theme }} </p>
                 <p>
-                    <small> {{ home_description }} </small>
+                    <small> {{ item.home_description }} </small>
                 </p>
                 <a href="#">Learn More <i class="fa fa-angle-right" aria-hidden="true"></i></a>
             </div>
+            {% endfor %}
         </div>
     </div>
 </div>
