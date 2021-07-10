@@ -4,6 +4,7 @@ from django.views.generic import View
 
 class MainView(View):
     def get(self, request):
+<<<<<<< HEAD
         return render(request, template_name="main/wrapper.html")
     
 class AboutView(View):
@@ -69,3 +70,12 @@ class ServicesView(View):
         return render(request, template_name="main/services.html", context={"right_top_content": right_top_content, "right_lower_content": right_lower_content})
 
 
+=======
+        return render(
+            request,
+            template_name="main/home.html",
+        )
+
+    def post(self, request):
+        pass
+>>>>>>> upstream/main
