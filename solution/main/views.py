@@ -1,13 +1,30 @@
-from django.shortcuts import render
+from django.http.response import BadHeaderError
+from django.shortcuts import render, redirect
 from django.views.generic import View
+from .forms import CustomLoginForm, CustomUserCreationForm
+from django.contrib import messages
+from django.core.mail import send_mail
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class MainView(View):
     def get(self, request):
-<<<<<<< HEAD
-        return render(request, template_name="main/wrapper.html")
+        login_form = CustomLoginForm()
+        register_form = CustomUserCreationForm()
+        return render(request, template_name="main/home.html", context={"login_form": login_form, "register_form": register_form})
     
-class AboutView(View):
+    def post(self, request):
+        login_form = CustomLoginForm()
+        register_form = CustomUserCreationForm(request.POST)
+        if register_form.is_valid():
+            register_form.save()
+            messages.success(request, 'Your account has been created success')
+            return redirect('main_view')
+        print(request.POST)
+        messages.warning(request, register_form.error_messages)
+        register_form = CustomUserCreationForm()
+        return render(request, template_name="main/home.html", context={"login_form": login_form, "register_form": register_form})
+class AboutView(LoginRequiredMixin, View):
     def get(self, request):
         info_dashboard = [
             {"card_title": 125, "card_text": "Active Projects"},
@@ -31,7 +48,19 @@ class AboutView(View):
         ]
         return render(request, template_name="main/about.html", context={"info_dashboard_data": info_dashboard, "personal": personals_info, "business_process": business_process})
 
-class HomeView(View):
+    def post(self, request):
+        username = request.POST.get('full_name')
+        from_email = request.POST.get('from_email')
+        message_text = request.POST.get('message')
+        subject = f'Obrashenie polzobatelya {username} s saita solution.com'
+        try:
+            send_mail(subject, message_text, from_email, recipient_list=[from_email])
+            messages.success(request, 'your request has been accepted, thanks')
+        except BadHeaderError as e:
+            messages.warning(request, e)
+        return redirect("main_about")
+
+""" class HomeView(View):
     def get(self, request):
         body_data = [
             {
@@ -42,9 +71,9 @@ class HomeView(View):
             }
         ]
         return render(request, template_name="main/home.html", 
-        context={"home_data": body_data})
+        context={"home_data": body_data}) """
 
-class NewsView(View):
+class NewsView(LoginRequiredMixin, View):
     def get(self, request):
         news_data = [
             {"img_path": "images/news1.jpg", "card_title": "5G, IoT, SaaS to drive Netherlands data centre growth", "card_text": "Government initiatives and enterprise deployment of IoT, 5G, SaaS, and AI applications will fuel an increase in data centre investment."},
@@ -56,7 +85,7 @@ class NewsView(View):
         ]
         return render(request, template_name="main/news.html", context={"news_data": news_data})
 
-class ServicesView(View):
+class ServicesView(LoginRequiredMixin, View):
     def get(self, request):
         right_top_content = [
             {"img_path": "images/web-design.png", "card_title": "Web Design", "card_text": "Manage a stably working website with quick access to all information."},
@@ -70,12 +99,3 @@ class ServicesView(View):
         return render(request, template_name="main/services.html", context={"right_top_content": right_top_content, "right_lower_content": right_lower_content})
 
 
-=======
-        return render(
-            request,
-            template_name="main/home.html",
-        )
-
-    def post(self, request):
-        pass
->>>>>>> upstream/main

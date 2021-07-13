@@ -17,31 +17,30 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light bg-transparent" id="gtco-main-nav">
-<<<<<<< HEAD:solution/main/templates/main/wrapper.html
-        <div class="container"><a href="{% url 'main_home' %}" class="navbar-brand">Solution</a>
-=======
-        <div class="container"><a href="{% url 'home_view' %}" class="navbar-brand">Solution</a>
->>>>>>> upstream/main:solution/main/templates/wrapper.html
+        <div class="container"><a href="{% url 'main_view' %}" class="navbar-brand">Solution</a>
             <button class="navbar-toggler" data-target="#my-nav" onclick="myFunction(this)" data-toggle="collapse"><span
                     class="bar1"></span> <span class="bar2"></span> <span class="bar3"></span></button>
             <div id="my-nav" class="collapse navbar-collapse">
                 <ul class="navbar-nav mr-auto">
-<<<<<<< HEAD:solution/main/templates/main/wrapper.html
                     <li class="nav-item"><a class="nav-link" href="{% url 'main_services' %}">Services</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'main_about' %}">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'main_news' %}">News</a></li>
-=======
-                    <li class="nav-item"><a class="nav-link" href="{% url 'services_view' %}">Services</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'about_view' %}">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'news_view' %}">News</a></li>
                     <li class="nav-item">
+                        {% if messages %}
+                        {% for msg in messages %}
+                        <div class="alert alert-{{ msg.tags }}">
+                            {{ msg }}
+
+                        </div>
+                        {% endfor %}
+                        {% endif %}
                     </li>
->>>>>>> upstream/main:solution/main/templates/wrapper.html
                 </ul>
 
                 <div class="col"></div>
 
                 <div class="col-4 d-flex">
+                    {% if not user.is_authenticated %}
                     <div class="m-2">
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-lg" data-toggle="modal" data-target="#login"
@@ -57,16 +56,16 @@
                             <span class="mx-3">Sign Up</span>
                         </button>
                     </div>
-
+                    {% else %}
 
                     <div class="m-2">
                         <!-- Button trigger modal -->
-                        <a class="btn btn-lg text-light"
+                        <a href="{% url 'logout' %}" class="btn btn-lg text-light"
                             style="border-radius: 50px; font-weight: bolder; background-color: rgb(233, 8, 8);">
                             <span class="mx-3">Logout</span>
                         </a>
                     </div>
-
+                    {% endif %}
                 </div>
 
 
@@ -79,14 +78,23 @@
                             <div class="modal-header">
                                 <h2 class="mx-auto">Sign In</h2>
                             </div>
-                            <div class="modal-body">
-                                <form action="{% url 'login_view' %}" method="POST">
+                            <div class="modal-body text-center">
+                                <form action="{% url 'login' %}" method="POST">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <label for="username" class="font-weight-bold mx-2">
+                                            {{ login_form.username.label }}
+                                        </label>
+                                        <br>
+                                        {{ login_form.username }}
+                                    </div>
 
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1" class="font-weight-bold mx-2">
-
+                                        <label for="password" class="font-weight-bold mx-2">
+                                            {{ login_form.password.label }}
                                         </label>
-
+                                        <br>
+                                        {{ login_form.password }}
                                     </div>
 
                                     <div class="modal-footer justify-content-center">
@@ -111,18 +119,22 @@
                             <div class="modal-header">
                                 <h2 class="mx-auto">Sign Up</h2>
                             </div>
-                            <div class="modal-body">
+                            <div class="modal-body text-center">
                                 <form method="POST">
-
+                                    {% csrf_token %}
+                                    {% for field in register_form %}
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1" class="font-weight-bold mx-2">
-
+                                        <label class="font-weight-bold mx-2">
+                                            {{ field.label }}
                                         </label>
+                                        <br>
+                                        {{ field }}
 
                                     </div>
                                     {% endfor %}
+
                                     <div class="modal-footer justify-content-center">
-                                        <button type="submit" class="btn btn-info" name="submit" value="signup">Sign
+                                        <button type="submit" class="btn btn-info">Sign
                                             Up</button>
                                         <button type="button" class="btn btn-danger" data-dismiss="modal">Quit</button>
                                     </div>
@@ -160,6 +172,7 @@
         <div class="container">
             <div class="row justify-content-around">
 
+                {% if request.get_full_path == '/about/' %}
                 <div class="col-lg-6" id="contact">
                     <form method="POST">
                         {% csrf_token %}
@@ -176,6 +189,7 @@
                         </div>
                     </form>
                 </div>
+                
                 <div class="col-lg-6">
                     <div class="row">
                         <div class="col-6">
@@ -239,6 +253,7 @@
                             </ul>
                         </div>
 
+                        {% endif %}
                         <div class="col-12 text-center">
                             <p>
                                 &copy; <a href="https://gettemplates.co" target="_blank">
