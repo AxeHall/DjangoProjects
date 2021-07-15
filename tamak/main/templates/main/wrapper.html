@@ -73,8 +73,7 @@
     <div class="boxed-page">
         <nav id="navbar-header" class="navbar navbar-expand-lg">
             <div class="container">
-                <a class="navbar-brand navbar-brand-center d-flex align-items-center p-0 only-mobile"
-                    href="{% url 'main:main' %}">
+                <a class="navbar-brand navbar-brand-center d-flex align-items-center p-0 only-mobile" href="">
                     <img src="{% static 'img/logo.png' %}" alt="Main Logo">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -92,11 +91,10 @@
                         </li>
                         <div class="d-flex flex-lg-row flex-column">
                             <li class="nav-item active">
-                                <a class="nav-link" href="{% url 'main:main' %}">Главная<span
-                                        class="sr-only">(current)</span></a>
+                                <a class="nav-link" href="{% url 'main' %}">Главная<span class="sr-only">(current)</span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{% url 'main:about' %}">О нас</a>
+                                <a class="nav-link" href="{% url 'about' %}">О нас</a>
                             </li>
 
                             <li class="nav-item dropdown">
@@ -105,48 +103,48 @@
                                     Меню
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="special-dishes.html">Основные Блюда</a>
-                                    <a class="dropdown-item" href="special-dishes.html">Вина</a>
+                                    <a class="dropdown-item" href="">Основные Блюда</a>
+                                    <a class="dropdown-item" href="">Вина</a>
                                 </div>
                             <li class="nav-item active">
-                                <a class="nav-link" href="{% url 'feedbacks' %}">Отзывы</a>
+                                <a class="nav-link" href="{% url 'feedback' %}">Отзывы</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="team/">Повара</a>
+                                <a class="nav-link" href="">Повара</a>
                             </li>
                             </li>
                         </div>
                     </ul>
 
-                    <a class="navbar-brand navbar-brand-center d-flex align-items-center only-desktop"
-                        href="{% url 'main:main' %}">
+                    <a class="navbar-brand navbar-brand-center d-flex align-items-center only-desktop" href="{% url 'main' %}">
                         <img src="{% static 'img/logo.png' %}" alt="Main Logo">
                     </a>
                     <ul class="navbar-nav d-flex justify-content-between">
                         <div class="d-flex flex-lg-row flex-column">
                             {% if user.is_authenticated %}
                             <li class="nav-item active">
-                                <a class="nav-link" href="{% url 'reservation:my_reservations' %}">Мои Брони<span
-                                        class="sr-only">(current)</span></a>
+                                <a class="nav-link" href="{% url 'reservation_list' %}">Мои Брони<span class="sr-only">(current)</span></a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="{% url 'reservation:reservation' %}">Забронировать<span
-                                        class="sr-only">(current)</span></a>
+                                <a class="nav-link" href="{% url 'reservation_create' %}">
+                                    Забронировать
+                                    <span class="sr-only">(current)</span>
+                                </a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="{% url 'logout' %}">Выйти<span
-                                        class="sr-only">(current)</span></a>
+                                <a class="nav-link" href="{% url 'logout' %}">
+                                    Выйти
+                                    <span class="sr-only">(current)</span>
+                                </a>
                             </li>
                             {% else %}
                             <li class="nav-item active">
-                                <a class="nav-link" href="{% url 'login' %}">Войти<span
-                                        class="sr-only">(current)</span></a>
+                                <a class="nav-link" href="{% url 'login' %}">Войти<span class="sr-only">(current)</span></a>
                             </li>
                             <li class="nav-item active">
-                                <a class="nav-link" href="{% url 'registration' %}">Регистрация<span
-                                        class="sr-only">(current)</span></a>
+                                <a class="nav-link" href="{% url 'registration' %}">Регистрация<span class="sr-only">(current)</span></a>
                             </li>
                             {% endif %}
                         </div>
