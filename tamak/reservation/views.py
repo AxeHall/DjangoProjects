@@ -4,7 +4,7 @@ from django.views.generic import View, CreateView, ListView
 from django.views.generic.edit import FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import ReservationCreateForm
-from .models import ReservationCreate
+from .models import Reservation
 
 
 class ReservationCreateView(LoginRequiredMixin, FormView):
@@ -20,6 +20,6 @@ class ReservationCreateView(LoginRequiredMixin, FormView):
         form.save()
         return super(ReservationCreateView, self).form_valid(form)
 
-class ReservationListView(ListView):
+class ReservationListView(LoginRequiredMixin, ListView):
     template_name="reservation/reservations_list.html"
-    model = ReservationCreate
+    model = Reservation

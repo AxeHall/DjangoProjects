@@ -48,7 +48,7 @@
         </div>
     </div>
 
-    ...
+    {% if user.is_superuser %}
     <div class="col-12 text-center">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
             Создать сотрдуника
@@ -78,5 +78,6 @@
             </div>
         </div>
     </div>
+    {% endif %}
 </div>
 {% endblock content %}

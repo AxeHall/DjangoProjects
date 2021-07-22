@@ -2,12 +2,12 @@ from django import forms
 from django.db.models.enums import IntegerChoices
 from django.forms import widgets
 from django.forms.widgets import DateInput, NumberInput, Textarea, TimeInput
-from .models import ReservationCreate
+from .models import Reservation
 
 
 class ReservationCreateForm(forms.ModelForm):
     class Meta:
-        model = ReservationCreate
+        model = Reservation
         exclude = ['client']
 
         widgets = {

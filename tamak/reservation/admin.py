@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import ReservationCreate
+from .models import Reservation
 
 
-admin.site.register(ReservationCreate)
+admin.site.register(Reservation)
