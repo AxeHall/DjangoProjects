@@ -30,7 +30,7 @@ class AboutView(LoginRequiredMixin, View):
             {"card_title": 125, "card_text": "Active Projects"},
             {"card_title": 200, "card_text": "Business Growth"},
             {"card_title": 530, "card_text": "Completed Projects"},
-            {"card_title": 941, "card_text": "Happy Clients"},
+            {"card_title": 941, "card_text": "Happy Client"},
         ]
         personals_info = [
             {"img_path": "images/customer1.jpg", "name": "Lisa Gally", "position":"Project Manager", "card_text": "Top Project Manager, 4 years of commercial development experience"},
